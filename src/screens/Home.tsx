@@ -16,12 +16,13 @@ import Voice, {
   SpeechEndEvent,
   SpeechResultsEvent,
 } from '@react-native-community/voice';
-import { generateResponse } from '../services/axios';
+import { generateResponse, handle_answer } from '../services/api/axios';
 import { StackNavigationProp } from '@react-navigation/stack';
 
 type RootStackParamList = {
   Home: undefined;
   Camera: undefined;
+  SoilAnalyzes: undefined;
 };
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
@@ -38,6 +39,7 @@ const Home: React.FC<Props> = ({ navigation }) => {
   const [responseList, setResponseList] = useState<any>([]);
 
   useEffect(() => {
+   try {
     Voice.onSpeechStart = onSpeechStartHandler;
     Voice.onSpeechEnd = onSpeechEndHandler;
     Voice.onSpeechResults = onSpeechResultsHandler;
@@ -45,6 +47,11 @@ const Home: React.FC<Props> = ({ navigation }) => {
     return () => {
       Voice.destroy().then(Voice?.removeAllListeners);
     };
+   } catch (error) {
+    console.log('====================================');
+    console.log('error raised', error);
+    console.log('====================================');
+   }
   }, []);
 
   const onSpeechStartHandler = (e: SpeechStartEvent) => {
@@ -77,6 +84,7 @@ const Home: React.FC<Props> = ({ navigation }) => {
 
   const stopRecording = async () => {
     setLoading(false);
+    setResponseList('')
     try {
       await Voice.stop();
     } catch (error) {
@@ -86,7 +94,10 @@ const Home: React.FC<Props> = ({ navigation }) => {
 
   const clickSendPromptText = async () => {
     setGetResponse(true);
-    const response = await generateResponse(result);
+    // const response = await generateResponse(result);
+    const response = await handle_answer(result)
+    console.log('====================================', response);
+    
     setResponseList([response, ...responseList]);
     setGetResponse(false);
   }
@@ -155,8 +166,13 @@ const Home: React.FC<Props> = ({ navigation }) => {
           )}
         />
         <View style={styles.bodyWrapper}>
-          <Button title="Go to Home" onPress={() =>
+          <Button title="Predict Diseases" onPress={() =>
         navigation.navigate('Camera')
+      } />
+        </View>
+        <View style={styles.bodyWrapper}>
+          <Button title="Predict Soild" onPress={() =>
+        navigation.navigate('SoilAnalyzes')
       } />
         </View>
         

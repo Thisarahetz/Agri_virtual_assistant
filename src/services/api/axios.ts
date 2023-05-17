@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {API_KEY, API_URL, API_PREDICT_DISEASES_URL} from '@env';
+import {API_KEY, API_URL, API_PREDICT_DISEASES_URL,API_PREDICT_SOIL_URL,API_HANDLE_ANSWER_URL} from '@env';
 
 /**
  *
@@ -29,7 +29,7 @@ export async function generateResponse(prompt: string) {
 }
 
 /**
- * 
+ *  Predict diseases
  * @param image form-data
  * @returns 
  */
@@ -39,10 +39,47 @@ export async function predictDiseases(image: any) {
   };
 
   try {
-     console.log('image', image);
-    
     const response = await axios.post(API_PREDICT_DISEASES_URL, image, {headers});
     return response.data;
+  } catch (error) {
+    console.log('error', error);
+  }
+}
+
+/**
+ * SoilAnalyze
+ * @param image form-data
+ * @returns 
+ */
+export async function predictSoild(image: any) {
+  const headers = {
+    'Content-Type': 'multipart/form-data',
+  };
+
+  try {
+    const response = await axios.post(API_PREDICT_SOIL_URL, image, {headers});
+    return response.data;
+  } catch (error) {
+    console.log('error', error);
+  }
+}
+
+
+
+/**
+ * handle_answer
+ * @param question form-data
+ * @returns 
+ */
+export async function handle_answer(question : any) {
+  const headers = {
+    'Content-Type': 'multipart/form-data',
+  };
+
+  try {
+    const response = await axios.post(API_HANDLE_ANSWER_URL, {"question": question}, {headers});
+    
+    return response.data.answer;
   } catch (error) {
     console.log('error', error);
   }

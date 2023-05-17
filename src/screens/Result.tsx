@@ -10,6 +10,7 @@ const Result : React.FC<any>  = ({ route  }) => {
     <View style={styles.container}>
         <Image style={styles.imageStyle} source={{ uri: image }} />
     <Text style={styles.title}>{data.class}</Text>
+    <Text style={styles.title}>confidence - {data.confidence}</Text>
     <View style={styles.detailsContainer}>
       <Text style={styles.subtitle}>Control Measures:</Text>
       {data.details.map((detail: any, index: number) => (

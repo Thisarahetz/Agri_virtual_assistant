@@ -9,7 +9,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { launchCamera, launchImageLibrary, CameraOptions, ImagePickerResponse } from 'react-native-image-picker';
-import { predictDiseases } from '../services/api/axios';
+import { predictSoild } from '../services/api/axios';
 import { StackNavigationProp } from '@react-navigation/stack';
 
 type RootStackParamList = {
@@ -24,7 +24,7 @@ type Props = {
   navigation: HomeScreenNavigationProp;
 };
 
-const Camera: React.FC<Props> = ({navigation}) => {
+const SoilAnalyze: React.FC<Props> = ({navigation}) => {
   const [cameraPhoto, setCameraPhoto] = useState<string | undefined>();
   const [galleryPhoto, setGalleryPhoto] = useState<string | undefined>();
   const [isLoading, setLoading] = useState<boolean>(false);
@@ -66,7 +66,7 @@ const Camera: React.FC<Props> = ({navigation}) => {
       type: 'image/jpeg', // Adjust the file type according to your needs
       name: 'image.jpg',
     });
-    const response : any= await predictDiseases(formData)
+    const response : any= await predictSoild (formData)
     
     if(response){
       navigation.navigate('Result', {data : response, image: cameraPhoto !== undefined ? cameraPhoto : galleryPhoto})
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Camera;
+export default SoilAnalyze;
 function alert(arg0: string) {
   throw new Error('Function not implemented.');
 }
