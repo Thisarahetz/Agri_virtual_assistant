@@ -1,6 +1,6 @@
 class AdaptiveFilter {
-    private weights: number[]; // Filter weights
-    private buffer: number[]; // Input buffer to store past samples
+    private weights: number[]; // Filter weights 
+    private buffer: number[]; // Input buffer to store past samples newWeight = oldWeight + stepSize * error * bufferElement
     private bufferSize: number; // Size of the input buffer
     private stepSize: number; // Step size for filter adaptation
   
@@ -34,17 +34,5 @@ class AdaptiveFilter {
     }
   }
   
-  // Example usage:
-  const bufferSize = 10;
-  const stepSize = 0.01;
-  
-  // Create an instance of the adaptive filter
-  const filter = new AdaptiveFilter(bufferSize, stepSize);
-  
-  // Process a sequence of input samples
-  const inputSamples = [0.5, 0.2, 0.1, 0.8, 0.4, 0.6];
-  for (const sample of inputSamples) {
-    const filteredSample = filter.filter(sample);
-    console.log(`Input: ${sample.toFixed(2)} | Filtered Output: ${filteredSample.toFixed(2)}`);
-  }
+
   

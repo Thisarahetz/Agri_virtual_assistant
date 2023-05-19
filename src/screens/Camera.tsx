@@ -91,7 +91,7 @@ const Camera: React.FC<Props> = ({navigation}) => {
             <ActivityIndicator size="large" color="red" />
           ) : (
       <TouchableOpacity onPress={onHandleClick} style={styles.button}>
-        <Text style={styles.buttonText}>Submit</Text>
+        <Text style={styles.buttonText}>Predit</Text>
       </TouchableOpacity>
           )}
 

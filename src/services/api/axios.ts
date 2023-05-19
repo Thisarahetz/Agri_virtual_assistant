@@ -12,9 +12,11 @@ export async function generateResponse(prompt: string) {
     Authorization: `Bearer ${API_KEY}`,
   };
 
+  const defaultPrompt = "as agriculture agent give me under 40 words  answer for this question "
+
   const data = {
     model: 'gpt-3.5-turbo',
-    messages: [{role: 'user', content: `"${prompt}"`}],
+    messages: [{role: 'user', content: `"${defaultPrompt + prompt}"`}],
     max_tokens: 50,
   };
 
