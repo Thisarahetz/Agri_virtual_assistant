@@ -20,6 +20,8 @@ The purpose of this research is to train a Chatbot specifically designed to supp
 ## Screenshots
 
 ![Mobile App](https://github.com/Thisarahetz/Agri_virtual_assistant/assets/43540833/40640267-c9fd-481f-b5b6-1da667aea4da)
+![Mobile App](https://github.com/Thisarahetz/Agri_virtual_assistant/assets/43540833/b218da69-cf63-43d7-a820-89bf7830c745)
+
 
 
 ## Installation
